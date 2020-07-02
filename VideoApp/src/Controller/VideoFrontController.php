@@ -76,4 +76,14 @@ class VideoFrontController extends AbstractController
 
         ]);
     }
+
+    /**
+     * @Route("/payment", name="payment")
+     */
+    public function payment()
+    {
+        return $this->render('video_front/payment.html.twig', [
+
+        ]);
+    }
 }
