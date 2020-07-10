@@ -82,7 +82,7 @@ class CategoryFixtures extends Fixture
     private function getMainCategoriesData()
     {
         return [
-                ['electronics', 1],
+                ['Electronics', 1],
                 ['Toys', 2],
                 ['Books', 3],
                 ['Movies', 4]
