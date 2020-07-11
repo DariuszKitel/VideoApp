@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Utils\ConcreteCategoryAdminList;
+use App\Utils\ConcreteCategoryAdminOptionList;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -32,11 +33,13 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/edit-category", name="edit_category")
+     * @Route("/edit-category/{id}", name="edit_category")
      */
-    public function editCategory()
+    public function editCategory(Category $cat)
     {
-        return $this->render('admin/edit_category.html.twig');
+        return $this->render('admin/edit_category.html.twig', [
+            'category' => $cat
+        ]);
     }
 
     /**
@@ -72,5 +75,14 @@ class AdminController extends AbstractController
     public function users()
     {
         return $this->render('admin/users.html.twig');
+    }
+
+    public function getAllCategories(ConcreteCategoryAdminOptionList $adminOptionList, $editedCategory = null)
+    {
+        $adminOptionList->getCategoryList($adminOptionList->buildTree());
+        return $this->render('admin/all_categories.html.twig', [
+            'categories' => $adminOptionList,
+            'editedCategory' => $editedCategory
+        ]);
     }
 }
